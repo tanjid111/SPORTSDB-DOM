@@ -31,12 +31,19 @@ const showPlayerDetails = (players) => {
             <h5>Country: ${player.strNationality}</h5>
             <p></p>
             <div class="allbutton">
-                <button class="btn btn-danger">Delete</button>
+                <button class="delete-btn btn btn-danger">Delete</button>
                 <button onclick="details(${player.idPlayer})" class="btn btn-success">Details</button>
             </div>
         </div>
     `
         parent.appendChild(div)
+        const deleteBtn = document.getElementsByClassName('delete-btn');
+        // console.log(deleteBtn)
+        for (const button of deleteBtn) {
+            button.addEventListener("click", (e) => {
+                e.target.parentNode.parentNode.style.display = "none";
+            });
+        }
     }
 }
 
@@ -58,8 +65,11 @@ const setDetails = (info) => {
     }
     document.getElementById('details-container').innerHTML = `
     <div>
-        <img src="" alt="">
+        <img class="w-50" src="${info.strThumb}" alt="">
         <h1>Name: ${info.strPlayer}</h1>
+        <h3>Country:${info.strNationality} </h3>
+        <h4>Gender: ${info.strGender}</h4>
+        <p>${info.strDescriptionEN.slice(0, 200)}</p>
     </div>
 `
 }
